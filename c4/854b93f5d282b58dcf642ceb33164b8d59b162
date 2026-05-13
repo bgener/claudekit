@@ -1,0 +1,46 @@
+templates/permissions/trust.json
+  ca9560379672c72e 3
+docs/architecture.md
+  ca9560379672c72e 1-2,4-7,9-73
+bin/session-guard.sh
+  ca9560379672c72e 5-31
+templates/permissions/safe.json
+  ca9560379672c72e 3
+docs/permission-profiles.md
+  ca9560379672c72e 1-65,67-201,203-214,216-249,251,254-276
+.gitignore
+  ca9560379672c72e 1-14
+templates/permissions/review.json
+  ca9560379672c72e 3
+docs/getting-started.md
+  ca9560379672c72e 1-13,16-25,27,30-39,41,43-52,54-89,94-141,143-151,153-163,165-169,171,173-185,187-188,190-195,197-207,209-213,215
+hooks/hooks.json
+  ca9560379672c72e 3-12
+CONTRIBUTING.md
+  ca9560379672c72e 7-11,13-15,19-38,40-155
+docs/session-management.md
+  ca9560379672c72e 1-2,4-23,25-43,48-62,64-67,69-132,134-137
+README.md
+  ca9560379672c72e 3-46,51-70,74,76-80,84-89,96-101,103,106-151,154,157-169,173-195,200-204,212-250
+skills/init/SKILL.md
+  ca9560379672c72e 45-112,202-203,212-239
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "c4854b93f5d282b58dcf642ceb33164b8d59b162",
+  "prompts": {
+    "ca9560379672c72e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e019dbcc-8d8f-40ad-a471-34378091a2fc",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Borys <bgener@gmail.com>",
+      "total_additions": 1576,
+      "total_deletions": 615,
+      "accepted_lines": 1061,
+      "overriden_lines": 77
+    }
+  }
+}
