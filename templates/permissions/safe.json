@@ -1,0 +1,180 @@
+{
+  "_comment": "Safe profile: auto-allow reads, edits, builds, tests. Block destructive operations. The init skill adapts this to the detected project stack.",
+  "cwd": "<absolute-path-to-project-root>",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "NotebookEdit",
+      "Agent",
+      "TaskCreate",
+      "TaskUpdate",
+      "TaskGet",
+
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(git show*)",
+      "Bash(git blame*)",
+      "Bash(git stash list*)",
+      "Bash(git rev-parse*)",
+      "Bash(git remote*)",
+
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(mkdir *)",
+      "Bash(pwd)",
+      "Bash(echo *)",
+      "Bash(cat *)",
+
+      "Bash(gh pr view*)",
+      "Bash(gh pr list*)",
+      "Bash(gh pr diff*)",
+      "Bash(gh pr checks*)",
+      "Bash(gh issue view*)",
+      "Bash(gh issue list*)",
+      "Bash(gh api *)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git checkout -- *)",
+      "Bash(git clean*)",
+      "Bash(git rebase*)",
+      "Bash(git merge*)",
+      "Bash(git branch -D*)",
+      "Bash(git branch -d*)",
+
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rmdir *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+
+      "Bash(curl -X POST*)",
+      "Bash(curl -X PUT*)",
+      "Bash(curl -X PATCH*)",
+      "Bash(curl -X DELETE*)",
+
+      "Bash(gh pr create*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh pr close*)",
+      "Bash(gh pr comment*)",
+      "Bash(gh issue create*)",
+      "Bash(gh issue close*)",
+      "Bash(gh api --method POST*)",
+      "Bash(gh api --method PUT*)",
+      "Bash(gh api --method PATCH*)",
+      "Bash(gh api --method DELETE*)",
+
+      "Bash(npm publish*)",
+      "Bash(npx publish*)",
+      "Bash(dotnet nuget push*)",
+      "Bash(pip upload*)",
+      "Bash(twine upload*)",
+      "Bash(cargo publish*)",
+      "Bash(gem push*)"
+    ]
+  },
+  "_stack_specific": {
+    "_comment": "The init skill adds relevant entries from these lists based on detected stack.",
+    "javascript_npm": [
+      "Bash(npm run *)",
+      "Bash(npm test*)",
+      "Bash(npm exec *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(tsx *)",
+      "Bash(tsc *)"
+    ],
+    "javascript_pnpm": [
+      "Bash(pnpm run *)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm exec *)",
+      "Bash(pnpm dlx *)"
+    ],
+    "javascript_yarn": [
+      "Bash(yarn run *)",
+      "Bash(yarn test*)",
+      "Bash(yarn dlx *)"
+    ],
+    "javascript_bun": [
+      "Bash(bun run *)",
+      "Bash(bun test*)",
+      "Bash(bunx *)"
+    ],
+    "dotnet": [
+      "Bash(dotnet build*)",
+      "Bash(dotnet test*)",
+      "Bash(dotnet run*)",
+      "Bash(dotnet restore*)",
+      "Bash(dotnet format*)",
+      "Bash(dotnet ef *)"
+    ],
+    "python": [
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(pytest*)",
+      "Bash(python -m pytest*)",
+      "Bash(python -m *)",
+      "Bash(ruff *)",
+      "Bash(black *)",
+      "Bash(mypy *)"
+    ],
+    "go": [
+      "Bash(go build*)",
+      "Bash(go test*)",
+      "Bash(go run*)",
+      "Bash(go vet*)",
+      "Bash(go mod *)",
+      "Bash(golangci-lint*)"
+    ],
+    "rust": [
+      "Bash(cargo build*)",
+      "Bash(cargo test*)",
+      "Bash(cargo run*)",
+      "Bash(cargo check*)",
+      "Bash(cargo clippy*)",
+      "Bash(cargo fmt*)"
+    ],
+    "java_maven": [
+      "Bash(mvn *)",
+      "Bash(./mvnw *)"
+    ],
+    "java_gradle": [
+      "Bash(gradle *)",
+      "Bash(./gradlew *)"
+    ],
+    "ruby": [
+      "Bash(bundle *)",
+      "Bash(rake *)",
+      "Bash(rails *)",
+      "Bash(rspec *)"
+    ],
+    "php": [
+      "Bash(composer *)",
+      "Bash(php *)",
+      "Bash(phpunit *)",
+      "Bash(./vendor/bin/*)"
+    ],
+    "make": [
+      "Bash(make *)",
+      "Bash(make)"
+    ],
+    "docker": [
+      "Bash(docker build*)",
+      "Bash(docker compose*)",
+      "Bash(docker run*)",
+      "Bash(docker ps*)",
+      "Bash(docker logs*)"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "claudekit",
+  "version": "0.1.0",
+  "description": "Golden standard AI-assisted development setup for any software repository. Analyzes your project and generates optimal Claude Code configuration: rules, permissions, hooks, and session management.",
+  "author": {
+    "name": "Borys Generalov",
+    "url": "https://github.com/bgener"
+  },
+  "repository": "https://github.com/bgener/claudekit",
+  "license": "Apache-2.0",
+  "keywords": [
+    "claude-code",
+    "developer-tools",
+    "ai-assisted-development",
+    "project-setup",
+    "permissions",
+    "session-management"
+  ]
+}

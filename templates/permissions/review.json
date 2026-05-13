@@ -1,0 +1,57 @@
+{
+  "_comment": "Review profile: only reads are auto-allowed. Everything else asks for confirmation. For onboarding, sensitive repos, or when you want full visibility.",
+  "cwd": "<absolute-path-to-project-root>",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch --list*)",
+      "Bash(git show*)",
+      "Bash(git blame*)",
+
+      "Bash(ls *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(pwd)",
+      "Bash(cat *)",
+
+      "Bash(gh pr view*)",
+      "Bash(gh issue view*)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git branch -D*)",
+
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+
+      "Bash(curl -X POST*)",
+      "Bash(curl -X PUT*)",
+      "Bash(curl -X PATCH*)",
+      "Bash(curl -X DELETE*)",
+
+      "Bash(gh pr create*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh issue create*)",
+      "Bash(gh api --method POST*)",
+      "Bash(gh api --method PUT*)",
+      "Bash(gh api --method PATCH*)",
+      "Bash(gh api --method DELETE*)",
+
+      "Bash(npm publish*)",
+      "Bash(dotnet nuget push*)",
+      "Bash(cargo publish*)"
+    ]
+  }
+}

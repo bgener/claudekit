@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# claude-safe - Launch Claude Code with safe permissions
+# Part of claudekit plugin
+#
+# Usage:
+#   claude-safe                 Use current directory
+#   claude-safe /path/to/dir    Use specified directory
+#   claude-safe --trust         Use trust profile
+#   claude-safe --review        Use review profile
+
+set -euo pipefail
+
+PROFILE="safe"
+TARGET_DIR=""
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --trust)   PROFILE="trust"; shift ;;
+    --review)  PROFILE="review"; shift ;;
+    --safe)    PROFILE="safe"; shift ;;
+    -h|--help)
+      cat <<'HELP'
+Usage: claude-safe [--safe|--trust|--review] [directory]
+
+Launch Claude Code with a permission profile.
+
+Profiles:
+  --safe    (default) Auto-allow reads, edits, builds, tests.
+            Block pushes, force operations, destructive commands.
+  --trust   Safe plus git commit, package install, curl GET.
+  --review  Confirm everything except reads. For onboarding.
+
+Examples:
+  claude-safe                     Current directory, safe profile
+  claude-safe --trust ~/my-app    Trust profile in ~/my-app
+HELP
+      exit 0
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      echo "Run claude-safe --help for usage" >&2
+      exit 1
+      ;;
+    *)
+      TARGET_DIR="$1"; shift ;;
+  esac
+done
+
+TARGET_DIR="${TARGET_DIR:-$(pwd)}"
+
+# Check Claude Code is installed
+if ! command -v claude &>/dev/null; then
+  echo "Error: Claude Code CLI not found." >&2
+  echo "Install: npm install -g @anthropic-ai/claude-code" >&2
+  exit 1
+fi
+
+# Check profile settings file exists
+SETTINGS_FILE="$TARGET_DIR/.claude/settings.$PROFILE.json"
+if [ ! -f "$SETTINGS_FILE" ]; then
+  echo "No claudekit settings found for profile '$PROFILE' in $TARGET_DIR" >&2
+  echo "Run /claudekit:init inside a Claude Code session first." >&2
+  exit 1
+fi
+
+# Clear previous session counters
+HASH=""
+if command -v md5sum &>/dev/null; then
+  HASH=$(echo "$TARGET_DIR" | md5sum | cut -d' ' -f1)
+elif command -v md5 &>/dev/null; then
+  HASH=$(echo "$TARGET_DIR" | md5 -q)
+else
+  HASH=$(echo "$TARGET_DIR" | cksum | cut -d' ' -f1)
+fi
+
+TMPBASE="${TMPDIR:-/tmp}"
+rm -f "${TMPBASE}/claudekit-${HASH}.count" 2>/dev/null
+rm -f "${TMPBASE}/claudekit-${HASH}.started" 2>/dev/null
+
+# Launch Claude Code with the profile settings file
+# --setting-sources "user" skips .claude/settings.json so the profile file
+# is the sole source of project-level permissions (not merged/additive)
+cd "$TARGET_DIR"
+exec claude --setting-sources "user" --settings "$SETTINGS_FILE"
