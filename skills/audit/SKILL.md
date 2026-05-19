@@ -56,13 +56,16 @@ Scoring:
 - No settings.json or no permissions: FAIL (every action asks for confirmation or runs unrestricted)
 - Check if destructive commands are blocked (git push, rm -rf, etc.)
 
-### 5. Session Management
+### 5. Session Management & Hooks
 
-Check for session guard hook in `.claude/settings.json` hooks section.
+Check for session guard hook and other hooks in `.claude/settings.json` hooks section.
 
 Scoring:
 - Hook exists that monitors session health: PASS
+- Hooks use external scripts (`type: "command"`) instead of large inline commands: PASS
+- Hooks use scripts from `.claude/scripts/`: PASS
 - No session management: WARN (long sessions will degrade without warning)
+- Hooks exist but are missing their underlying scripts: FAIL
 
 Check for `.claude/scripts/session-guard.sh` or similar.
 
@@ -88,7 +91,19 @@ Scoring:
 - Some missing: WARN
 - No .gitignore or none ignored: FAIL
 
-### 8. Agents
+### 8. Advanced Skills, Scripts, and Assets
+
+Check `.claude/skills/` for custom agent definitions and skills.
+Rules and skills can be more than just markdown. Efficient setups use scripts and assets to keep context lean.
+
+Scoring:
+- Skills are organized in directories with their own `SKILL.md`: PASS
+- Skills use `scripts/` directory for executable logic instead of inline bash: PASS (optimal)
+- Skills use `assets/` directory for templates and large context: PASS (optimal)
+- `SKILL.md` contains large hardcoded templates/logic instead of external files: WARN (wastes context)
+- No skills or advanced rules found: INFO
+
+### 9. Agents
 
 Check `.claude/agents/` for custom agent definitions.
 

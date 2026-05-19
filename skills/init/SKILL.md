@@ -259,7 +259,16 @@ Example: if there is a `packages/api/` and `packages/web/`:
 
 Do NOT create these for single-app projects.
 
-### 4f. .gitignore Updates
+### 4g. Golden Skill Example
+
+Copy the golden rule template to demonstrate advanced skill structures (scripts and assets) so the team has a reference point for efficient rules.
+
+Read the contents from `${CLAUDE_PLUGIN_ROOT}/templates/skills/golden-rule/` and write them to `.claude/skills/golden-rule/`:
+- `SKILL.md`
+- `scripts/validate.sh`
+- `assets/template.md`
+
+### 4h. .gitignore Updates
 
 Check if `.gitignore` exists. If it does, append (if not already present):
 
@@ -286,6 +295,7 @@ Generated configuration:
   .claude/settings.review.json     review profile permissions + hooks
   .claude/rules/code-style.md      18 lines
   .claude/rules/testing.md         12 lines
+  .claude/skills/golden-rule/      golden skill template with scripts and assets
   .claude/scripts/session-guard.sh session monitor
   .gitignore                       updated (3 lines added)
 
